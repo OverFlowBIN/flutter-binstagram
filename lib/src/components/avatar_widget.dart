@@ -16,12 +16,17 @@ class AvatarWidget extends StatelessWidget {
     required this.thumbPath,
     this.hasStory,
     this.nickname,
-    this.size,
+    this.size = 80,
   });
 
   Widget type1Widget() {
+    return type2Widget();
+  }
+
+  Widget type2Widget() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.all(4),
       decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -29,9 +34,50 @@ class AvatarWidget extends StatelessWidget {
               colors: [Colors.purple, Colors.orange]),
           shape: BoxShape.circle),
       child: Container(
-          width: 60,
-          height: 60,
-          child: CachedNetworkImage(imageUrl: thumbPath, fit: BoxFit.cover)),
+        padding: const EdgeInsets.all(1),
+        decoration:
+            const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(size!),
+          child: SizedBox(
+              width: size,
+              height: size,
+              child:
+                  CachedNetworkImage(imageUrl: thumbPath, fit: BoxFit.cover)),
+        ),
+      ),
+    );
+  }
+
+  Widget type3Widget() {
+    return Row(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.all(3),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [Colors.purple, Colors.orange]),
+              shape: BoxShape.circle),
+          child: Container(
+            padding: const EdgeInsets.all(1),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: Colors.white),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(size!),
+              child: SizedBox(
+                  width: size,
+                  height: size,
+                  child: CachedNetworkImage(
+                      imageUrl: thumbPath, fit: BoxFit.cover)),
+            ),
+          ),
+        ),
+        Text(nickname ?? 'overflowbin',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12))
+      ],
     );
   }
 
@@ -41,8 +87,9 @@ class AvatarWidget extends StatelessWidget {
       case AvatarType.TYPE1:
         return type1Widget();
       case AvatarType.TYPE2:
+        return type2Widget();
       case AvatarType.TYPE3:
-        return Container();
+        return type3Widget();
     }
   }
 }
