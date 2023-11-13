@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_binstagram/src/components/image_data.dart';
 import 'package:flutter_binstagram/src/controller/bottom_nav_controller.dart';
 import 'package:flutter_binstagram/src/pages/home.dart';
-import 'package:flutter_binstagram/src/pages/page.dart';
+import 'package:flutter_binstagram/src/pages/search.dart';
 import 'package:get/get.dart';
 
 class App extends GetView<BottomNavController> {
@@ -18,7 +18,13 @@ class App extends GetView<BottomNavController> {
             backgroundColor: Colors.white,
             body: IndexedStack(index: controller.pageIndex.value, children: [
               const Home(),
-              const Search(),
+              Navigator(
+                key: controller.searchPageNavigationKey,
+                onGenerateRoute: (routeSetting) {
+                  return MaterialPageRoute(
+                      builder: (context) => const Search());
+                },
+              ),
               Container(child: Center(child: Text('UPLOAD'))),
               Container(child: Center(child: Text('ACTIVITY'))),
               Container(child: Center(child: Text('MYPAGE'))),
