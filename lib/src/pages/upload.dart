@@ -1,14 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_binstagram/src/components/image_data.dart';
 import 'package:get/get.dart';
+import 'package:photo_manager/photo_manager.dart';
 
-class Upload extends StatelessWidget {
+class Upload extends StatefulWidget {
   const Upload({super.key});
 
+  @override
+  State<Upload> createState() => _UploadState();
+}
+
+class _UploadState extends State<Upload> {
+  var albums = <AssetPathEntity>[];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPhotos();
+  }
+
+  void _loadPhotos() async {
+    var result = await PhotoManager.requestPermissionExtend();
+    if (result.isAuth) {
+      albums = await PhotoManager.getAssetPathList(
+          type: RequestType.image,
+          filterOption: FilterOptionGroup(
+              imageOption: const FilterOption(
+                  sizeConstraint:
+                      SizeConstraint(minHeight: 100, minWidth: 100)),
+              orders: [
+                const OrderOption(type: OrderOptionType.createDate, asc: false)
+              ]));
+      _loadData();
+    } else {
+      // manage 관한 요청
+    }
+  }
+
+  void _loadData() {
+    print('loaded data!');
+  }
+
   Widget _imagePreview() {
+    var width = MediaQuery.of(context).size.width;
     return Container(
-      width: Get.width,
-      height: Get.width,
+      width: width,
+      height: width,
       color: Colors.grey,
     );
   }
