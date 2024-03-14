@@ -38,7 +38,7 @@ class _UploadState extends State<Upload> {
   }
 
   void _loadData() {
-    print('loaded data!');
+    print(albums.first.name);
   }
 
   Widget _imagePreview() {

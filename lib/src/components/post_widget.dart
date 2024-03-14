@@ -87,7 +87,7 @@ class PostWidget extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           ),
           ExpandableText(
-            '언니참지마!\nyerin_the_genuine 박보영폼미쳣다\nyerin_the_genuine 박보영폼미쳣다\nyerin_the_genuine 박보영폼미쳣다\n',
+            '컨텐츠1입니다.',
             prefixText: 'overFlowBIN',
             // onPrefixTap: () {
             //   print('overFlowBIN 페이지로 이동');

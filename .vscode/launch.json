@@ -5,6 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Flutter: Attach to Device",
+      "type": "dart",
+      "request": "attach"
+    },
+    {
       "name": "flutter_binstagram",
       "request": "launch",
       "type": "dart"
@@ -17,6 +22,12 @@
     },
     {
       "name": "flutter_binstagram (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "iPhone 15 Pro Max",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
